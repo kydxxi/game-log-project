@@ -1,67 +1,61 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const cors = require('cors');
+const morgan = require('morgan');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
-const db = require('./config/db');
+const dotenv = require('dotenv');
+const cors = require('cors');
+
+dotenv.config();
+
+const passportConfig = require('./passport');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+passportConfig();
+app.set('port', process.env.PORT || 4000);
 
+app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET || 'session-secret-key'));
 
-app.use(session({
-  secret: 'yunji-secret-key',
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET || 'session-secret-key',
+    cookie: {
+      httpOnly: true,
+      secure: false
+    }
+  })
+);
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password'
-}, async (email, password, done) => {
-  try {
-    const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-    if (rows.length === 0) return done(null, false, { message: '이메일 없음' });
+app.use('/api/auth', authRouter);
 
-    const user = rows[0];
-    const isMatch = await bcrypt.compare(password, user.password_hash);
-    if (!isMatch) return done(null, false, { message: '비밀번호 틀림' });
-
-    return done(null, { id: user.id, email: user.email, nickname: user.nickname });
-  } catch (err) {
-    done(err);
-  }
-}));
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'NOT FOUND' });
 });
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const [rows] = await db.query('SELECT id, email, nickname FROM users WHERE id = ?', [id]);
-    if (rows.length === 0) return done(null, false);
-    done(null, rows[0]);
-  } catch (err) {
-    done(err);
-  }
+app.use((err, req, res, next) => {
+  console.error(err);
+  res
+    .status(err.status || 500)
+    .json({ message: err.message || 'SERVER ERROR' });
 });
 
-
-app.use('/api/auth', require('./routes/auth'));
-
-
-const PORT = 4000;
-app.listen(PORT, () => {
-  console.log(`🚀 Backend running at http://localhost:${PORT}`);
+app.listen(app.get('port'), () => {
+  console.log(`Backend running on http://localhost:${app.get('port')}`);
 });
