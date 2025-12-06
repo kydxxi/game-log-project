@@ -1,45 +1,50 @@
-#  Game Log Project
-라이엇 게임(롤/발로란트)의 플레이 기록을 저장하고,  
-통계, 댓글, 팔로우 기능을 제공하는 웹 서비스입니다.
+# Game Log Project
 
-백엔드는 Node.js + Express + Passport(Local) 기반이며  
-프론트엔드는 React로 구성됩니다.
+본 프로젝트는 라이엇 게임(리그 오브 레전드, 발로란트)의 플레이 기록을 저장하고,  
+사용자의 활동 통계 및 기본적인 소셜 기능(댓글, 팔로우)을 제공하는 웹 서비스입니다.
 
----
-
-##  Features
-
-###  Authentication
-- 회원가입 / 로그인 / 로그아웃
-- Passport(Local) + Express-Session 기반
-
-###  Game Sessions
-- 게임 기록 작성
-- 플레이 시간, 날짜, 느낀점, 스크린샷 URL 저장
-- 자신의 기록 목록 조회
-- 상세 조회 / 삭제
-
-###  Comments
-- 각 게임 기록에 댓글 작성
-
-###  Follow
-- 유저 팔로우 / 언팔로우
-- 팔로워 / 팔로잉 목록 조회
-
-###  Stats
-- 총 플레이 시간
-- 게임별 시간 비율
-- 주간 / 월간 통계
+백엔드는 Node.js + Express 기반으로 구현되며,  
+사용자 인증은 Passport(Local Strategy)와 세션 기반 로그인으로 구성됩니다.
 
 ---
 
-##  Tech Stack
+## 1. 주요 기능
+
+### 1) 인증(Authentication)
+- 회원가입
+- 로그인 / 로그아웃
+- 로그인 상태 확인
+
+### 2) 게임 기록(Game Sessions)
+- 플레이 기록 작성
+- 날짜, 플레이 시간, 느낀점, 스크린샷 URL 저장
+- 기록 목록 조회
+- 기록 상세 조회
+- 기록 삭제
+
+### 3) 댓글 기능(Comments)
+- 게임 기록에 대한 댓글 작성
+
+### 4) 팔로우 기능(Follow)
+- 사용자 팔로우
+- 팔로우 취소
+- 팔로워 목록 조회
+- 팔로잉 목록 조회
+
+### 5) 통계 기능(Statistics)
+- 총 플레이 시간 조회
+- 게임별 플레이 시간 비율
+- 주간 및 월간 통계 제공
+
+---
+
+## 2. 기술 스택
 
 ### Backend
 - Node.js
 - Express.js
-- Passport(Local)  
-- Express-Session  
+- Passport(Local Strategy)
+- Express-Session
 - MySQL (mysql2)
 - bcrypt
 - CORS
@@ -51,44 +56,43 @@
 
 ---
 
-##  Folder Structure
+## 3. 폴더 구조
 
 ```
 game-log-project/
  ├─ backend/
  │    ├─ app.js
  │    ├─ config/
- │    │     └─ config.json
  │    ├─ controllers/
  │    ├─ middlewares/
  │    ├─ models/
  │    ├─ passport/
- │    ├─ routes/
- │    └─ package.json
+ │    └─ routes/
  │
- ├─ frontend/
+ ├─ frontend/   (추후 개발 예정)
  │
- └─ schema.sql
+ ├─ schema.sql
+ └─ README.md
 ```
 
 ---
 
-##  Backend Installation & Run
+## 4. Backend 실행 방법
 
-### 1) Install dependencies
+### (1) 의존성 설치
 
-```bash
+```
 cd backend
 npm install
 ```
 
-### 2) Run server
+### (2) 서버 실행
 
-```bash
+```
 npm start
 ```
 
-### 3) Server runs on:
+### (3) 서버 기본 주소
 
 ```
 http://localhost:4000
@@ -96,45 +100,37 @@ http://localhost:4000
 
 ---
 
-##  Database Setup
+## 5. Database 설정
 
-MySQL에서 다음 실행:
+### (1) MySQL에서 아래 명령어로 스키마 생성
 
-```sql
-SOURCE docs/schema.sql;
+```
+SOURCE schema.sql;
 ```
 
-또는 수동으로:
-
-1. `game_log` DB 생성  
-2. `users`, `games`, `sessions`, `comments`, `follows` 테이블 생성  
-→ docs/schema.sql 참고
-
----
-
-##  API Documentation
-
-모든 API 명세는 아래 문서 참고:
-
-➡ **docs/api.md**
+### (2) 생성되는 주요 테이블
+- users
+- games
+- sessions
+- comments
+- follows
 
 ---
 
-## Team
+## 6. 주의사항 및 참고 사항
 
-- Backend: 202355705 김윤지  
-- Frontend: 김예준
-
----
-
-##  Notes
-
-- 프론트 fetch 요청 시 `credentials: 'include'` 필수  
-- CORS는 `http://localhost:3000` 기준 설정됨  
-- Passport의 세션 방식이므로 브라우저 쿠키 필요
+- 프론트엔드에서 요청 시 `credentials: "include"` 설정 필요  
+  (세션 기반 인증을 위한 쿠키 포함)
+- CORS는 기본적으로 `http://localhost:3000` 기준으로 설정됨
+- 세션 기반 인증을 사용하므로 브라우저 쿠키가 필요함
 
 ---
 
-##  END
+## 7. 팀 구성
 
-이 README는 텀프로젝트 제출용 + 팀 협업용으로 작성되었습니다.
+- Backend : 202355705 김윤지
+- Frontend : 김예준
+
+---
+
+
