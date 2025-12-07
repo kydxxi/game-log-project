@@ -11,11 +11,13 @@
 ## 1. 주요 기능
 
 ### 1) 인증(Authentication)
+
 - 회원가입
 - 로그인 / 로그아웃
 - 로그인 상태 확인
 
 ### 2) 게임 기록(Game Sessions)
+
 - 플레이 기록 작성
 - 날짜, 플레이 시간, 느낀점, 스크린샷 URL 저장
 - 기록 목록 조회
@@ -23,15 +25,18 @@
 - 기록 삭제
 
 ### 3) 댓글 기능(Comments)
+
 - 게임 기록에 대한 댓글 작성
 
 ### 4) 팔로우 기능(Follow)
+
 - 사용자 팔로우
 - 팔로우 취소
 - 팔로워 목록 조회
 - 팔로잉 목록 조회
 
 ### 5) 통계 기능(Statistics)
+
 - 총 플레이 시간 조회
 - 게임별 플레이 시간 비율
 - 주간 및 월간 통계 제공
@@ -41,6 +46,7 @@
 ## 2. 기술 스택
 
 ### Backend
+
 - Node.js
 - Express.js
 - Passport(Local Strategy)
@@ -52,7 +58,8 @@
 - morgan
 
 ### Frontend
-- React (예정)
+
+- React 
 
 ---
 
@@ -109,6 +116,7 @@ SOURCE schema.sql;
 ```
 
 ### (2) 생성되는 주요 테이블
+
 - users
 - games
 - sessions
@@ -129,8 +137,6 @@ SOURCE schema.sql;
 ## 7. 팀 구성
 
 - Backend : 202355705 김윤지
-- Frontend : 김예준
+- Frontend : 202255527 김예준
 
 ---
-
-
