@@ -4,8 +4,8 @@
 사용자의 활동 통계 및 기본적인 소셜 기능(댓글, 팔로우)을 제공하는 웹 서비스입니다.
 
 백엔드는 Node.js + Express 기반으로 구현되며,  
-사용자 인증은 Passport(Local Strategy)와 세션 기반 로그인으로 구성됩니다.
-전체 REST API 명세는 아래 파일 참고:
+사용자 인증은 Passport(Local Strategy)와 세션 기반 로그인으로 구성됩니다.  
+전체 REST API 명세는 아래 파일 참고:  
  -> [api.md](./api.md)
 
 ---
