@@ -29,6 +29,8 @@
 ### 3) 댓글 기능(Comments)
 
 - 게임 기록에 대한 댓글 작성
+- 댓글 조회
+- 댓글 삭제
 
 ### 4) 팔로우 기능(Follow)
 
@@ -52,16 +54,16 @@
 - Node.js
 - Express.js
 - Passport(Local Strategy)
-- Express-Session
+- express-session
 - MySQL (mysql2)
 - bcrypt
-- CORS
+- cors
 - dotenv
 - morgan
 
 ### Frontend
 
-- React 
+- React (추후 개발 예정)
 
 ---
 
@@ -78,7 +80,7 @@ game-log-project/
  │    ├─ passport/
  │    └─ routes/
  │
- ├─ frontend/   (추후 개발 예정)
+ ├─ frontend/
  │
  ├─ schema.sql
  ├─ api.md
@@ -130,23 +132,24 @@ SOURCE schema.sql;
 
 ## 6. 주의사항 및 참고 사항
 
-- 프론트엔드에서 요청 시 `credentials: "include"` 설정 필요  
+- 프론트엔드에서 요청 시 `credentials: "include"` 설정 필수  
   (세션 기반 인증을 위한 쿠키 포함)
-- CORS는 기본적으로 `http://localhost:3000` 기준으로 설정됨
-- 세션 기반 인증을 사용하므로 브라우저 쿠키가 필요함
+- CORS는 기본적으로 `http://localhost:3000` 기준
+- 세션 기반 인증을 사용하므로 브라우저 쿠키 필요
 
 ---
+
 ## 7. 환경 변수 (.env)
 
- - backend/.env 파일을 생성 후 아래 값 입력
- ```
-  COOKIE_SECRET=your-secret-key
-  DB_HOST=localhost
-  DB_USER=root
-  DB_PASSWORD=비밀번호
-  DB_DATABASE=game_log
-  ```
+backend/.env 파일을 생성하고 아래 값 입력:
 
+```
+COOKIE_SECRET=your-secret-key
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=비밀번호
+DB_DATABASE=game_log
+```
 
 ---
 
@@ -156,5 +159,3 @@ SOURCE schema.sql;
 - Frontend : 202255527 김예준
 
 ---
-
-
