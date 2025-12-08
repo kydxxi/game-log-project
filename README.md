@@ -139,11 +139,13 @@ SOURCE schema.sql;
 ## 7. 환경 변수 (.env)
 
  - backend/.env 파일을 생성 후 아래 값 입력
+ ```
   COOKIE_SECRET=your-secret-key
   DB_HOST=localhost
   DB_USER=root
   DB_PASSWORD=비밀번호
   DB_DATABASE=game_log
+  ```
 
 
 ---
