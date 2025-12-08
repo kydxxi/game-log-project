@@ -59,10 +59,11 @@ Response 성공:
 ```
 Response:
 { "message": "Logged out" }
-
+```
 ---
 
 ## 1-4. 로그인 상태 조회 (GET /auth/me)
+```
 로그인 시:
 {
   "user": { "id": 1, "email": "user@example.com", "nickname": "nickname" }
