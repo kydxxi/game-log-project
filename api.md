@@ -15,6 +15,7 @@
 # 1. 인증(Auth) API [구현 완료]
 
 ## 1-1. 회원가입 (POST /auth/signup)
+```
 Request:
 {
   "email": "user@example.com",
@@ -32,9 +33,11 @@ Response 성공:
   }
 }
 
+```
 ---
 
 ## 1-2. 로그인 (POST /auth/login)
+```
 Request:
 {
   "email": "user@example.com",
@@ -49,10 +52,11 @@ Response 성공:
     "nickname": "nickname"
   }
 }
-
+```
 ---
 
 ## 1-3. 로그아웃 (POST /auth/logout)
+```
 Response:
 { "message": "Logged out" }
 
@@ -68,12 +72,13 @@ Response:
 {
   "user": null
 }
-
+```
 ---
 
 # 2. 세션(Session) API [구현 완료]
 
 ## 2-1. 기록 생성 (POST /sessions)
+```
 Request:
 {
   "game_code": "lol",
@@ -96,10 +101,11 @@ Response:
     "created_at": "2025-12-08T12:34:56.000Z"
   }
 }
-
+```
 ---
 
 ## 2-2. 내 기록 조회 (GET /sessions/me)
+```
 Query 옵션:
 ?from=2025-12-01&to=2025-12-31&game_code=lol
 
@@ -116,10 +122,11 @@ Response:
     }
   ]
 }
-
+```
 ---
 
 ## 2-3. 기록 상세 (GET /sessions/:id)
+```
 Response:
 {
   "session": {
@@ -133,18 +140,20 @@ Response:
     "created_at": "2025-12-08T12:34:56.000Z"
   }
 }
-
+```
 ---
 
 ## 2-4. 기록 삭제 (DELETE /sessions/:id)
+```
 Response:
 { "message": "Session deleted" }
-
+```
 ---
 
 # 3. 댓글 API [ 미구현 ]
 
 ## 3-1. 댓글 작성 (POST /comments)
+```
 Request:
 {
   "session_id": 10,
@@ -161,10 +170,11 @@ Response:
     "created_at": "2025-12-08T14:00:00.000Z"
   }
 }
-
+```
 ---
 
 ## 3-2. 댓글 조회 (GET /comments?session_id=10)
+```
 Response:
 {
   "comments": [
@@ -177,36 +187,40 @@ Response:
     }
   ]
 }
-
+```
 ---
 
 # 4. 팔로우 API [ 미구현 ]
 
 ## 4-1. 팔로우 (POST /follows/:targetUserId)
+```
 Response:
 { "message": "Followed" }
-
+```
 ---
 
 ## 4-2. 언팔로우 (DELETE /follows/:targetUserId)
+```
 Response:
 { "message": "Unfollowed" }
-
+```
 ---
 
 ## 4-3. 내 팔로잉 목록 (GET /follows/me)
+```
 Response:
 {
   "following": [
     { "id": 2, "email": "friend@example.com", "nickname": "친구닉네임" }
   ]
 }
-
+```
 ---
 
 # 5. 통계 API [ 미구현 ]
 
 ## 5-1. 통계 조회 (GET /stats/me?range=weekly or monthly)
+```
 Response:
 {
   "stats": {
@@ -218,7 +232,7 @@ Response:
     ]
   }
 }
-
+```
 ---
 
 # 6. 규칙
