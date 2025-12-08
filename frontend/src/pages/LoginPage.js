@@ -5,7 +5,7 @@ import api from '../api';
 import { Container, Form, Button, Card, FloatingLabel } from 'react-bootstrap';
 
 function LoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       const response = await api.post('/auth/login', {
-        username: username,
+        email: email,
         password: password,
       });
       if (response.status === 200) {
@@ -52,8 +52,8 @@ function LoginPage() {
                 <Form.Control 
                   type="text" 
                   placeholder="name@example.com" 
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="rounded-3"
                   style={{ background: '#f8f9fa', border: 'none' }}
                 />
