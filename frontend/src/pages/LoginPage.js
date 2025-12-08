@@ -21,7 +21,7 @@ function LoginPage() {
         navigate('/dashboard');
       }
     } catch (error) {
-      console.error(error);apfhdqk
+      console.error(error);
       alert('아이디 또는 비밀번호를 확인해주세요.');
     }
   };
