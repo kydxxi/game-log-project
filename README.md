@@ -4,7 +4,9 @@
 사용자의 활동 통계 및 기본적인 소셜 기능(댓글, 팔로우)을 제공하는 웹 서비스입니다.
 
 백엔드는 Node.js + Express 기반으로 구현되며,  
-사용자 인증은 Passport(Local Strategy)와 세션 기반 로그인으로 구성됩니다.
+사용자 인증은 Passport(Local Strategy)와 세션 기반 로그인으로 구성됩니다.  
+전체 REST API 명세는 아래 파일 참고:  
+ -> [api.md](./api.md)
 
 ---
 
@@ -79,6 +81,7 @@ game-log-project/
  ├─ frontend/   (추후 개발 예정)
  │
  ├─ schema.sql
+ ├─ api.md
  └─ README.md
 ```
 
@@ -133,10 +136,25 @@ SOURCE schema.sql;
 - 세션 기반 인증을 사용하므로 브라우저 쿠키가 필요함
 
 ---
+## 7. 환경 변수 (.env)
 
-## 7. 팀 구성
+ - backend/.env 파일을 생성 후 아래 값 입력
+ ```
+  COOKIE_SECRET=your-secret-key
+  DB_HOST=localhost
+  DB_USER=root
+  DB_PASSWORD=비밀번호
+  DB_DATABASE=game_log
+  ```
+
+
+---
+
+## 8. 팀 구성
 
 - Backend : 202355705 김윤지
 - Frontend : 202255527 김예준
 
 ---
+
+
