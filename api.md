@@ -33,8 +33,8 @@ Response 성공:
     "created_at": "2025-12-06T12:34:56.000Z"
   }
 }
-
 ```
+
 ---
 
 ## 1-2. 로그인 (POST /auth/login)
@@ -54,6 +54,7 @@ Response 성공:
   }
 }
 ```
+
 ---
 
 ## 1-3. 로그아웃 (POST /auth/logout)
@@ -61,6 +62,7 @@ Response 성공:
 Response:
 { "message": "Logged out" }
 ```
+
 ---
 
 ## 1-4. 로그인 상태 조회 (GET /auth/me)
@@ -75,6 +77,7 @@ Response:
   "user": null
 }
 ```
+
 ---
 
 # 2. 세션(Session) API [구현 완료]
@@ -104,6 +107,7 @@ Response:
   }
 }
 ```
+
 ---
 
 ## 2-2. 내 기록 조회 (GET /sessions/me)
@@ -125,6 +129,7 @@ Response:
   ]
 }
 ```
+
 ---
 
 ## 2-3. 기록 상세 (GET /sessions/:id)
@@ -143,6 +148,7 @@ Response:
   }
 }
 ```
+
 ---
 
 ## 2-4. 기록 삭제 (DELETE /sessions/:id)
@@ -150,9 +156,14 @@ Response:
 Response:
 { "message": "Session deleted" }
 ```
+
 ---
 
-# 3. 댓글 API [ 미구현 ]
+# 3. 댓글 API [구현 완료]
+
+> 규칙  
+> - 댓글 작성/삭제는 로그인 필요  
+> - 댓글 삭제는 작성자 본인만 가능  
 
 ## 3-1. 댓글 작성 (POST /comments)
 ```
@@ -173,6 +184,7 @@ Response:
   }
 }
 ```
+
 ---
 
 ## 3-2. 댓글 조회 (GET /comments?session_id=10)
@@ -190,15 +202,31 @@ Response:
   ]
 }
 ```
+
 ---
 
-# 4. 팔로우 API [ 미구현 ]
+## 3-3. 댓글 삭제 (DELETE /comments/:id)
+```
+설명:
+- 로그인 필수
+- 작성자 본인만 삭제 가능
+
+Response:
+{
+  "message": "Comment deleted"
+}
+```
+
+---
+
+# 4. 팔로우 API [미구현]
 
 ## 4-1. 팔로우 (POST /follows/:targetUserId)
 ```
 Response:
 { "message": "Followed" }
 ```
+
 ---
 
 ## 4-2. 언팔로우 (DELETE /follows/:targetUserId)
@@ -206,6 +234,7 @@ Response:
 Response:
 { "message": "Unfollowed" }
 ```
+
 ---
 
 ## 4-3. 내 팔로잉 목록 (GET /follows/me)
@@ -217,9 +246,10 @@ Response:
   ]
 }
 ```
+
 ---
 
-# 5. 통계 API [ 미구현 ]
+# 5. 통계 API [미구현]
 
 ## 5-1. 통계 조회 (GET /stats/me?range=weekly or monthly)
 ```
@@ -235,6 +265,7 @@ Response:
   }
 }
 ```
+
 ---
 
 # 6. 규칙

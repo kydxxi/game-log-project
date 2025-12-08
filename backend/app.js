@@ -62,6 +62,8 @@ app.use(passport.session());
 // 6. 라우터들 (모든 미들웨어 설정 뒤에)
 app.use('/api/auth', authRouter);
 app.use('/api/sessions', sessionRouter);
+app.use('/api/comments', require('./routes/comments'));
+
 
 // 7. 404 핸들러
 app.use((req, res, next) => {
