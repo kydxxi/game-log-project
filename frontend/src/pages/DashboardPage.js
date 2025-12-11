@@ -88,20 +88,13 @@ function DashboardPage() {
               </span> 
               님의 기록 🎮
             </h2>
+            <p className="text-muted mb-0">
+              My ID: <span className="fw-bold text-primary">#{user ? user.id : '?'}</span> 
+              (친구에게 이 번호를 알려주세요!)
+            </p>
             <p className="text-muted mb-0">오늘의 플레이를 기록해보세요!</p>
           </div>
           <div className="d-flex align-items-center gap-3">
-            <Button onClick={() => navigate('/stats')} variant="outline-primary" className="rounded-pill px-3">
-              📊 통계
-            </Button>
-            <Button 
-                onClick={handleLogout} 
-                variant="outline-secondary" 
-                size="sm"
-                className="rounded-pill px-3"
-            >
-                로그아웃
-            </Button>
             
             <Button 
               onClick={() => navigate('/write')} 
@@ -175,7 +168,7 @@ function DashboardPage() {
                       </div>
                     )}
                     <hr className="my-3" style={{ opacity: 0.1 }} />
-                    <CommentSection sessionId={session.id} />
+                    <CommentSection sessionId={session.id} currentUser={user} />
                   </Card.Body>
                 </Card>
               </Col>

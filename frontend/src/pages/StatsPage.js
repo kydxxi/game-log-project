@@ -42,17 +42,6 @@ function StatsPage() {
   return (
     <div style={{ background: '#f8f9fa', minHeight: '100vh', padding: '40px 0' }}>
       <Container>
-        {/*홈으로 돌아가기 버튼*/}
-        <div className="mb-4">
-          <Button 
-            variant="outline-secondary" 
-            className="rounded-pill px-3 fw-bold"
-            onClick={() => navigate('/dashboard')}
-            style={{ border: '2px solid #e9ecef', background: 'white', color: '#495057' }}
-          >
-            ← 홈으로 돌아가기
-          </Button>
-        </div>
 
         <h2 className="fw-bold mb-4">📊 이번 달 플레이 분석</h2>
         
@@ -89,7 +78,7 @@ function StatsPage() {
               {stats.daily.map((day, index) => (
                 <Col xs={6} md={3} key={index} className="mb-3">
                   <div className="p-3 rounded-3 text-center" style={{ background: '#e9ecef' }}>
-                    <div className="fw-bold">{day.date}</div>
+                    <div className="fw-bold">{day.date.split('T')[0]}</div>
                     <div className="text-primary">{day.minutes}분</div>
                   </div>
                 </Col>
