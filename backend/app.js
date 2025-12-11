@@ -10,24 +10,24 @@ const sessionRouter = require('./routes/sessions');
 const authRouter = require('./routes/auth');
 const passportConfig = require('./passport');
 
+
 dotenv.config();
 
 const app = express();
-passportConfig();
+passportConfig();  
 
 app.set('port', process.env.PORT || 4000);
 
 // 1. 로깅
 app.use(morgan('dev'));
 
-// 2. CORS (라우터보다 먼저, preflight 포함)
+// 2. CORS 
 app.use(
   cors({
     origin: 'http://localhost:3000',
     credentials: true,
   })
 );
-// OPTIONS 프리플라이트도 같은 설정으로 처리
 app.options(
   '*',
   cors({
@@ -55,14 +55,16 @@ app.use(
   })
 );
 
-// 5. passport 초기화 (세션 뒤에)
+// 5. passport 초기화
 app.use(passport.initialize());
 app.use(passport.session());
 
-// 6. 라우터들 (모든 미들웨어 설정 뒤에)
+// 6. 라우터 등록 
 app.use('/api/auth', authRouter);
 app.use('/api/sessions', sessionRouter);
 app.use('/api/comments', require('./routes/comments'));
+app.use('/api/follows', require('./routes/follows'));
+app.use('/api/stats', require('./routes/stats'));
 
 
 // 7. 404 핸들러
