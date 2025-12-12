@@ -1,16 +1,16 @@
 const mysql = require('mysql2');
-const env = process.env.NODE_ENV || 'development';
+require('dotenv').config(); 
 
-const config = require(process.cwd() + '/config/config.json')[env];
-
-const pool = mysql.createPool({
-  host: config.host,
-  user: config.username,
-  password: config.password,
-  database: config.database,
-  waitForConnections: true,
-  connectionLimit: 10,
-  enableKeepAlive: true,
-}).promise();
+const pool = mysql
+  .createPool({
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '1234',
+    database: process.env.DB_DATABASE || 'game_log',
+    waitForConnections: true,
+    connectionLimit: 10,
+    enableKeepAlive: true,
+  })
+  .promise();
 
 module.exports = pool;

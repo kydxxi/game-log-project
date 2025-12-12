@@ -10,13 +10,13 @@
 - Base URL: http://localhost:4000/api
 - 모든 Request/Response 형식: application/json
 - 인증 방식: 세션(Session) 기반 로그인
+- 인증이 필요한 요청은 반드시 withCredentials 사용
 
 ---
 
 # 1. 인증(Auth) API [구현 완료]
 
 ## 1-1. 회원가입 (POST /auth/signup)
-```
 Request:
 {
   "email": "user@example.com",
@@ -24,7 +24,7 @@ Request:
   "password": "plain_password"
 }
 
-Response 성공:
+Response:
 {
   "user": {
     "id": 1,
@@ -33,19 +33,17 @@ Response 성공:
     "created_at": "2025-12-06T12:34:56.000Z"
   }
 }
-```
 
 ---
 
 ## 1-2. 로그인 (POST /auth/login)
-```
 Request:
 {
   "email": "user@example.com",
   "password": "plain_password"
 }
 
-Response 성공:
+Response:
 {
   "user": {
     "id": 1,
@@ -53,20 +51,16 @@ Response 성공:
     "nickname": "nickname"
   }
 }
-```
 
 ---
 
 ## 1-3. 로그아웃 (POST /auth/logout)
-```
 Response:
 { "message": "Logged out" }
-```
 
 ---
 
 ## 1-4. 로그인 상태 조회 (GET /auth/me)
-```
 로그인 시:
 {
   "user": { "id": 1, "email": "user@example.com", "nickname": "nickname" }
@@ -76,14 +70,12 @@ Response:
 {
   "user": null
 }
-```
 
 ---
 
 # 2. 세션(Session) API [구현 완료]
 
 ## 2-1. 기록 생성 (POST /sessions)
-```
 Request:
 {
   "game_code": "lol",
@@ -106,13 +98,11 @@ Response:
     "created_at": "2025-12-08T12:34:56.000Z"
   }
 }
-```
 
 ---
 
 ## 2-2. 내 기록 조회 (GET /sessions/me)
-```
-Query 옵션:
+Query:
 ?from=2025-12-01&to=2025-12-31&game_code=lol
 
 Response:
@@ -128,12 +118,10 @@ Response:
     }
   ]
 }
-```
 
 ---
 
 ## 2-3. 기록 상세 (GET /sessions/:id)
-```
 Response:
 {
   "session": {
@@ -147,26 +135,43 @@ Response:
     "created_at": "2025-12-08T12:34:56.000Z"
   }
 }
-```
 
 ---
 
 ## 2-4. 기록 삭제 (DELETE /sessions/:id)
-```
 Response:
 { "message": "Session deleted" }
-```
+
+---
+
+## 2-5. 피드 조회 (GET /sessions/feed)
+
+설명:
+- 로그인한 사용자 + 팔로우한 사용자들의 기록을 최신순으로 반환
+
+Response:
+{
+  "sessions": [
+    {
+      "id": 12,
+      "user_id": 2,
+      "nickname": "친구닉",
+      "game_code": "lol",
+      "play_date": "2025-12-12",
+      "play_time_minutes": 90,
+      "feeling": "오늘 솔랭 굿굿",
+      "screenshot_url": null,
+      "created_at": "2025-12-12T10:30:00.000Z"
+    }
+  ]
+}
+
 
 ---
 
 # 3. 댓글 API [구현 완료]
 
-> 규칙  
-> - 댓글 작성/삭제는 로그인 필요  
-> - 댓글 삭제는 작성자 본인만 가능  
-
 ## 3-1. 댓글 작성 (POST /comments)
-```
 Request:
 {
   "session_id": 10,
@@ -183,12 +188,10 @@ Response:
     "created_at": "2025-12-08T14:00:00.000Z"
   }
 }
-```
 
 ---
 
 ## 3-2. 댓글 조회 (GET /comments?session_id=10)
-```
 Response:
 {
   "comments": [
@@ -196,74 +199,58 @@ Response:
       "id": 5,
       "session_id": 10,
       "user_id": 1,
+      "nickname": "윤지",
       "content": "플레이 잘하셨네요!",
       "created_at": "2025-12-08T14:00:00.000Z"
     }
   ]
 }
-```
 
 ---
 
 ## 3-3. 댓글 삭제 (DELETE /comments/:id)
-```
-설명:
-- 로그인 필수
-- 작성자 본인만 삭제 가능
-
 Response:
-{
-  "message": "Comment deleted"
-}
-```
+{ "message": "Comment deleted" }
 
 ---
 
 # 4. 팔로우 API [구현 완료]
 
-> 규칙  
-> - 모든 엔드포인트는 로그인 필요  
-> - 자기 자신은 팔로우할 수 없음  
-> - 같은 사용자를 여러 번 팔로우 요청해도 1번만 유지됨 (UNIQUE 제약)
-
 ## 4-1. 팔로우 (POST /follows/:targetUserId)
-```
 Response:
 { "message": "Followed" }
-```
 
 ---
 
 ## 4-2. 언팔로우 (DELETE /follows/:targetUserId)
-```
 Response:
 { "message": "Unfollowed" }
-```
 
 ---
 
 ## 4-3. 내 팔로잉 목록 (GET /follows/me)
-```
 Response:
 {
   "following": [
     { "id": 2, "email": "friend@example.com", "nickname": "친구닉네임" }
   ]
 }
-```
+
+---
+
+## 4-4. 내 팔로워 목록 (GET /follows/followers/me)
+Response:
+{
+  "followers": [
+    { "id": 3, "email": "user2@example.com", "nickname": "팔로워닉네임" }
+  ]
+}
 
 ---
 
 # 5. 통계 API [구현 완료]
 
-> 규칙  
-> - 로그인 필요  
-> - `range` 값에 따라 기간이 달라짐  
->   - `weekly`  : 오늘 포함 최근 7일  
->   - `monthly` : 오늘 기준 1개월
-
 ## 5-1. 통계 조회 (GET /stats/me?range=weekly or monthly)
-```
 Response:
 {
   "stats": {
@@ -275,12 +262,11 @@ Response:
     ]
   }
 }
-```
 
 ---
 
 # 6. 규칙
-1. API 변경 시 api.md 먼저 수정.
-2. 필드명은 문서 기준으로 통일.
-3. 모든 API 경로는 /api 하위에 존재.
-4. 인증 기반 API는 withCredentials 필요.
+1. API 변경 시 api.md 먼저 수정
+2. 필드명은 문서 기준으로 통일
+3. 모든 API 경로는 /api 하위
+4. 인증 기반 API는 withCredentials 필요

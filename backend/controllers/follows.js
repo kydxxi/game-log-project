@@ -104,3 +104,30 @@ exports.unfollowUser = async (req, res, next) => {
     next(err);
   }
 };
+
+// 팔로워 목록 조회 (GET /follows/followers/me)
+exports.getMyFollowers = async (req, res, next) => {
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      return res.status(401).json({ message: '로그인이 필요합니다.' });
+    }
+
+    const [rows] = await db.execute(
+      `
+      SELECT u.id, u.email, u.nickname
+      FROM follows f
+      JOIN users u ON f.follower_id = u.id
+      WHERE f.followee_id = ?
+      ORDER BY u.nickname ASC, u.id ASC
+      `,
+      [userId],
+    );
+
+    return res.json({ followers: rows });
+  } catch (err) {
+    next(err);
+  }
+};
+

@@ -69,10 +69,19 @@ exports.getComments = async (req, res, next) => {
     }
 
     const [rows] = await db.execute(
-      `SELECT id, session_id, user_id, content, created_at
-       FROM comments
-       WHERE session_id = ?
-       ORDER BY created_at ASC`,
+      `
+      SELECT
+        c.id,
+        c.session_id,
+        c.user_id,
+        u.nickname,
+        c.content,
+        c.created_at
+      FROM comments c
+      JOIN users u ON c.user_id = u.id
+      WHERE c.session_id = ?
+      ORDER BY c.created_at ASC
+      `,
       [session_id],
     );
 
@@ -81,6 +90,7 @@ exports.getComments = async (req, res, next) => {
     next(err);
   }
 };
+
 
 // 3-3. 댓글 삭제 (DELETE /comments/:id)
 exports.deleteComment = async (req, res, next) => {

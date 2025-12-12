@@ -189,3 +189,44 @@ exports.deleteSession = async (req, res, next) => {
   }
 };
 
+/**
+ * GET /api/sessions/feed
+ * 나 + 내가 팔로우한 유저들의 기록 피드
+ */
+exports.getFeedSessions = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    const [rows] = await db.execute(
+      `
+      SELECT
+        s.id,
+        s.user_id,
+        u.nickname,
+        g.code AS game_code,
+        s.play_date,
+        s.play_time_minutes,
+        s.feeling,
+        s.screenshot_url,
+        s.created_at
+      FROM sessions s
+      JOIN users u ON s.user_id = u.id
+      JOIN games g ON s.game_id = g.id
+      WHERE
+        s.user_id = ?
+        OR s.user_id IN (
+          SELECT followee_id
+          FROM follows
+          WHERE follower_id = ?
+        )
+      ORDER BY s.play_date DESC, s.id DESC
+      `,
+      [userId, userId]
+    );
+
+    return res.json({ sessions: rows });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
