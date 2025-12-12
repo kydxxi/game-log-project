@@ -75,7 +75,9 @@ function CommentSection({ sessionId, currentUser }) {
               comments.map((c) => (
                 <ListGroup.Item key={c.id} className="bg-transparent px-0 py-2 d-flex justify-content-between align-items-start">
                   <div>
-                    <span className="fw-bold me-2" style={{ fontSize: '0.9rem' }}>User {c.user_id}</span>
+                    <span className="fw-bold me-2" style={{ fontSize: '0.9rem' }}>
+                      {c.nickname}
+                    </span>
                     <span className="text-secondary">{c.content}</span>
                   </div>
                   
