@@ -109,7 +109,7 @@ function DashboardPage() {
                         <div className="d-flex align-items-center gap-2">
                           <small className="text-muted fw-bold">{formatDate(session.play_date)}</small>
                           
-                          {/* ★ 수정됨: isOwner가 true일 때만 휴지통 아이콘 표시 ★ */}
+                          {/* 자기 자신 댓글에만 휴지통 아이콘 표시*/}
                           {isOwner && (
                             <button 
                               onClick={() => handleDelete(session.id)} 

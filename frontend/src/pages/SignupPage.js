@@ -62,7 +62,6 @@ function SignupPage() {
             <div className="text-center mb-4">
               <span style={{ fontSize: '3rem' }}>📝</span>
               <h2 className="fw-bold mt-2" style={{ color: '#4a4a4a' }}>Join Us!</h2>
-              {/* <p className="text-muted">30초면 회원가입이 완료됩니다.</p> */}
             </div>
 
             <Form onSubmit={handleSignup}>

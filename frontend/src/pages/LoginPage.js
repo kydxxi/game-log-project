@@ -47,7 +47,7 @@ function LoginPage() {
             </div>
 
             <Form onSubmit={handleLogin}>
-              {/* 트렌디한 플로팅 라벨 1: 아이디 */}
+              {/* 플로팅 라벨 1: 아이디 */}
               <FloatingLabel controlId="floatingInput" label="아이디" className="mb-3">
                 <Form.Control 
                   type="text" 
@@ -59,7 +59,7 @@ function LoginPage() {
                 />
               </FloatingLabel>
 
-              {/* 트렌디한 플로팅 라벨 2: 비밀번호 */}
+              {/* 플로팅 라벨 2: 비밀번호 */}
               <FloatingLabel controlId="floatingPassword" label="비밀번호" className="mb-4">
                 <Form.Control 
                   type="password" 

@@ -73,11 +73,11 @@ function FollowPage() {
           </Card.Body>
         </Card>
 
-        {/* 탭 메뉴 (팔로잉 vs 팔로워) */}
+        {/* 탭 메뉴 (팔로잉, 팔로워) */}
         <Card className="shadow-sm border-0 rounded-4 p-3">
           <Tabs defaultActiveKey="following" id="follow-tabs" className="mb-3" fill>
             
-            {/* 탭 1: 내가 건 친구들 */}
+            {/* 탭 1: 팔로잉 목록 */}
             <Tab eventKey="following" title={`팔로잉 ${followingList.length}`}>
               <ListGroup variant="flush">
                 {followingList.length === 0 ? <p className="text-center text-muted py-3">팔로우한 친구가 없습니다.</p> : 
@@ -101,7 +101,7 @@ function FollowPage() {
               </ListGroup>
             </Tab>
 
-            {/* 탭 2: 나를 건 친구들 (NEW) */}
+            {/* 탭 2: 팔로워 목록 */}
             <Tab eventKey="followers" title={`팔로워 ${followerList.length}`}>
                <ListGroup variant="flush">
                 {followerList.length === 0 ? <p className="text-center text-muted py-3">아직 나를 팔로우한 사람이 없습니다.</p> : 

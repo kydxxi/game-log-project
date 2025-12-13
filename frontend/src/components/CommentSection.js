@@ -17,7 +17,7 @@ function CommentSection({ sessionId, currentUser }) {
 
   const fetchComments = async () => {
     try {
-      // 3-2. 댓글 조회 API
+      // 댓글 조회 API
       const res = await api.get(`/comments?session_id=${sessionId}`);
       setComments(res.data.comments);
     } catch (error) {
@@ -30,7 +30,7 @@ function CommentSection({ sessionId, currentUser }) {
     if (!newComment.trim()) return;
 
     try {
-      // 3-1. 댓글 작성 API
+      // 댓글 작성 API
       const res = await api.post('/comments', {
         session_id: sessionId,
         content: newComment
@@ -47,7 +47,7 @@ function CommentSection({ sessionId, currentUser }) {
     if (!window.confirm('댓글을 삭제할까요?')) return;
 
     try {
-      // 3-3. 댓글 삭제 API
+      // 댓글 삭제 API
       await api.delete(`/comments/${commentId}`);
       // 화면에서 바로 제거
       setComments(comments.filter((c) => c.id !== commentId));

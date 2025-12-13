@@ -14,7 +14,7 @@ function StatsPage() {
 
   const fetchStats = async () => {
     try {
-      // 5-1. 통계 조회 API 호출
+      // 통계 조회 API 호출
       const response = await api.get('/stats/me?range=monthly');
       setStats(response.data.stats);
     } catch (error) {

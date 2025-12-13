@@ -25,7 +25,7 @@ function WritePage() {
       navigate('/dashboard');
     } catch (error) {
       console.error(error);
-      alert('저장 실패 ㅠㅠ');
+      alert('저장 실패! 다시 시도해주세요.');
     }
   };
 
