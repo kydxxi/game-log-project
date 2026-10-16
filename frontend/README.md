@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# Game Log 프론트엔드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Game Log의 React 클라이언트입니다. 게임 기록을 작성하고 친구의 기록을 피드에서 확인하는 화면을 구현했습니다. 프로젝트 개요, 팀 역할, DB 설정은 [루트 README](../README.md)를 참고하세요.
 
-## Available Scripts
+## 화면과 기능
 
-In the project directory, you can run:
+- 로그인·회원가입: Passport 세션 인증 API와 연동
+- 피드: 내 기록과 팔로우한 사용자의 기록 조회, 내 기록 삭제, 댓글 표시
+- 기록 작성: 게임 종류·날짜·플레이 시간·소감 입력
+- 친구: 팔로우·언팔로우, 팔로잉·팔로워 목록
+- 통계: 월간 총 플레이 시간, 게임별 비율, 날짜별 기록 표시
 
-### `npm start`
+주요 화면은 `src/pages/`, 공통 내비게이션과 댓글 UI는 `src/components/`에 있습니다. React, React Router, React-Bootstrap, Axios를 사용합니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 로컬 실행
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+루트 README의 안내에 따라 MySQL과 백엔드를 먼저 실행한 뒤, 저장소 루트에서 다음 명령을 실행합니다.
 
-### `npm test`
+```bash
+npm install --prefix frontend
+npm start --prefix frontend
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+브라우저에서 `http://localhost:3000`을 엽니다. `src/api.js`는 로컬 백엔드 `http://localhost:4000/api`를 호출하며 세션 쿠키를 포함합니다.
 
-### `npm run build`
+## 현재 코드의 주의사항
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+통계 화면은 API 요청에 실패하면 임시 예시 데이터를 표시합니다. 실제 통계를 확인하려면 백엔드와 DB가 정상 실행 중인지 확인해야 합니다.
